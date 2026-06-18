@@ -186,8 +186,10 @@ let soundEnabled = true, audioCtx = null, bgmTimer = null;
 const melodyNotes = [261.6, 329.6, 392.0, 523.3, 392.0, 329.6];
 let noteStep = 0;
 function initAudio() {
-  if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  if(audioCtx.state === 'suspended') audioCtx.resume();
+  try {
+    if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if(audioCtx.state === 'suspended') audioCtx.resume();
+  } catch(e) { soundEnabled = false; $('#soundIcon').textContent = '🔇'; }
 }
 // unlock audio on first touch (iOS/Android autoplay policy)
 document.addEventListener('touchstart', function unlock(){
