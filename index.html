@@ -26,15 +26,12 @@
   .screen.on{display:flex; animation:pop .35s ease;}
   @keyframes pop{from{transform:scale(.94);opacity:0} to{transform:scale(1);opacity:1}}
   @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-
   h1{font-size:clamp(30px,8vw,56px); margin:.1em 0; color:#fff; text-shadow:0 4px 0 var(--ink-soft), 0 8px 14px rgba(0,0,0,.2);}
   .tag{color:var(--ink-soft); font-size:clamp(15px,3.6vw,20px); margin-bottom:18px;}
   .mascot{font-size:clamp(56px,16vw,96px); animation:float 2.6s ease-in-out infinite; filter:drop-shadow(0 12px 8px rgba(0,0,0,.18));}
-
   .card{background:var(--card); border-radius:var(--r); padding:22px; box-shadow:var(--shadow); width:min(440px,92vw); border:3px solid rgba(36,59,83,.06);}
   .field{display:block; width:100%; margin:10px 0; padding:16px 18px; font-family:var(--font); font-size:20px; border-radius:16px; border:3px solid #d6e2ef; outline:none; text-align:center;}
   .field:focus{border-color:var(--teal);}
-
   .btn{font-family:var(--font); font-weight:800; font-size:clamp(18px,4.4vw,22px); color:#fff; background:var(--gold); border:none; cursor:pointer; padding:16px 22px; border-radius:18px; width:100%; margin:8px 0; box-shadow:0 6px 0 var(--gold-d), 0 10px 18px rgba(240,165,0,.35); transition:transform .08s, box-shadow .08s;}
   .btn:active{transform:translateY(4px); box-shadow:0 2px 0 var(--gold-d);}
   .btn.green{background:var(--teal); box-shadow:0 6px 0 #1a9e92, 0 10px 18px rgba(46,196,182,.35);}
@@ -43,11 +40,10 @@
   .btn.ghost:active{box-shadow:0 2px 0 #d2e0ee;}
   .btn.small{width:auto; padding:12px 18px; font-size:16px;}
   .btn[disabled]{opacity:.5; pointer-events:none;}
-
   .hud{position:absolute; top:0; left:0; right:0; display:flex; justify-content:space-between; align-items:center; padding:12px 14px; gap:10px; z-index:5;}
   .pill{background:#fff; border-radius:999px; padding:8px 14px; font-weight:800; font-size:16px; box-shadow:0 4px 0 rgba(36,59,83,.12); display:flex; align-items:center; gap:6px;}
   .pill .lbl{color:var(--ink-soft); font-weight:700; font-size:13px;}
-
+  .top-right-float{position:absolute; top:12px; right:14px; z-index:99; cursor:pointer;}
   .timer-wrap{width:min(440px,92vw); margin:6px 0 14px;}
   .timer-bar{height:18px; background:#dcebf7; border-radius:999px; overflow:hidden; box-shadow:inset 0 2px 4px rgba(0,0,0,.1);}
   .timer-fill{height:100%; width:100%; background:linear-gradient(90deg,#2ec4b6,#ffc93c,#ff6b6b); border-radius:999px; transition:width .25s linear;}
@@ -59,23 +55,19 @@
   .choice:active{transform:translateY(4px);}
   .choice.right{background:var(--teal); color:#fff; box-shadow:0 6px 0 #1a9e92;}
   .choice.wrong{background:var(--red); color:#fff; box-shadow:0 6px 0 var(--red-d);}
-
   #gameCanvas{position:absolute; inset:0; width:100%; height:100%; touch-action:none; cursor:crosshair;}
   .target-info{position:absolute; top:58px; left:50%; transform:translateX(-50%); z-index:4; background:#fff; padding:9px 18px; border-radius:18px; font-weight:800; font-size:clamp(15px,4.2vw,19px); box-shadow:0 5px 0 rgba(36,59,83,.15); white-space:nowrap; text-align:center;}
   .target-info b{color:var(--red); font-size:1.25em;}
   .target-info .warn{display:block; font-size:.78em; color:var(--ink-soft); font-weight:700; margin-top:2px;}
   .float-stop{position:absolute; left:14px; bottom:14px; z-index:6; background:var(--red); color:#fff; border:none; font-family:var(--font); font-weight:800; font-size:15px; padding:12px 16px; border-radius:14px; box-shadow:0 5px 0 var(--red-d); cursor:pointer;}
   .float-stop:active{transform:translateY(3px); box-shadow:0 2px 0 var(--red-d);}
-
   .countdown{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(36,59,83,.35); z-index:8; backdrop-filter:blur(2px);}
   .countdown .num{font-size:34vw; font-weight:900; color:#fff; text-shadow:0 8px 0 var(--ink-soft); animation:pop .4s ease;}
   .countdown .go{font-size:18vw; color:var(--gold);}
-
   .big-emoji{font-size:clamp(64px,18vw,110px); animation:float 2s ease-in-out infinite;}
   .result-line{font-size:18px; color:var(--ink-soft); margin:6px 0;}
   .coin-big{font-size:clamp(34px,9vw,54px); font-weight:900; color:var(--gold-d);}
   .hint{font-size:13px; color:var(--ink-soft); margin-top:14px; opacity:.85;}
-
   .log-box{background:#fff; border-radius:16px; padding:12px 14px; width:min(560px,94vw); max-height:56vh; overflow:auto; box-shadow:var(--shadow); text-align:left; font-size:12.5px; line-height:1.45; margin-bottom:14px;}
   .log-row{padding:6px 2px; border-bottom:1px solid #eef2f7; display:flex; gap:8px; align-items:baseline;}
   .log-row:last-child{border-bottom:none;}
@@ -87,7 +79,9 @@
 </head>
 <body>
 <div id="app">
-
+  <button id="soundToggle" class="pill top-right-float">
+    <span id="soundIcon">🔇</span> <span class="lbl">เสียง</span>
+  </button>
   <!-- 1) LOGIN -->
   <section class="screen on" id="s-login">
     <div class="mascot">🏹</div>
@@ -99,7 +93,6 @@
     </div>
     <div class="hint">เกมนี้สำหรับเด็กอายุ 9 ขวบ · เล่นที่บ้านผ่านอินเทอร์เน็ต</div>
   </section>
-
   <!-- 2) MENU -->
   <section class="screen" id="s-menu">
     <div class="mascot">🦊</div>
@@ -112,7 +105,6 @@
       <button class="btn ghost small" id="logoutBtn">เปลี่ยนชื่อผู้เล่น</button>
     </div>
   </section>
-
   <!-- 3) QUIZ -->
   <section class="screen" id="s-quiz">
     <div class="hud">
@@ -127,7 +119,6 @@
     <div class="qbox"><div class="qtext" id="qText">7 × 8 = ?</div></div>
     <div class="choices" id="choices"></div>
   </section>
-
   <!-- 4) ARCHERY -->
   <section class="screen" id="s-archery" style="padding:0">
     <canvas id="gameCanvas"></canvas>
@@ -143,7 +134,6 @@
     <button class="float-stop" id="stopGameBtn">⏸ หยุดเกม</button>
     <div class="countdown" id="countdown"><div class="num" id="cdNum">3</div></div>
   </section>
-
   <!-- 5) WIN -->
   <section class="screen" id="s-win">
     <div class="big-emoji">🏆</div>
@@ -156,8 +146,7 @@
     </div>
     <div class="hint">ด่านต่อไปจะเร็วขึ้นนะ ตั้งใจอ่านโจทย์ให้ดี!</div>
   </section>
-
-  <!-- 6) STOP / GAME OVER (ยิงผิด / กดหยุด / ลูกหมด) -->
+  <!-- 6) STOP / GAME OVER -->
   <section class="screen" id="s-stop">
     <div class="big-emoji" id="stopEmoji">🛑</div>
     <h1 id="stopTitle">หยุดเกมแล้ว</h1>
@@ -170,8 +159,7 @@
     </div>
     <div class="hint">คะแนนที่ได้ถูกบันทึกลงฐานข้อมูลเรียบร้อย ✓</div>
   </section>
-
-  <!-- 7) WRONG (ตอบโจทย์ผิด/หมดเวลา) -->
+  <!-- 7) WRONG -->
   <section class="screen" id="s-wrong">
     <div class="big-emoji">🤔</div>
     <h1 id="wrongTitle">ลองใหม่นะ!</h1>
@@ -181,7 +169,6 @@
       <button class="btn ghost" id="wrongMenuBtn">กลับเมนู</button>
     </div>
   </section>
-
   <!-- 8) LOG VIEWER -->
   <section class="screen" id="s-log">
     <h1 style="font-size:clamp(26px,6vw,40px)">📜 บันทึกฐานข้อมูล</h1>
@@ -189,62 +176,82 @@
     <div class="log-box" id="logBox"></div>
     <button class="btn ghost" id="logBackBtn" style="width:min(560px,94vw)">กลับเมนู</button>
   </section>
-
 </div>
-
 <script>
 /* =========================================================
-   eiMaths ยิงธนูคณิต — E-learning game
-   FLOW: login → menu(new/continue) → quiz(4 ตัวเลือก + นับถอยหลัง)
-         → ตอบถูก → ยิงธนู(30 ลูก: จริง 5 + หลอก random 25, 2 ฝั่ง)
-         → ยิงโดนเลขอื่น = จบทันที / กดปุ่มหยุดเองได้ / ครบ 5 = ผ่านด่าน
-         → ทุกครั้งที่จบรอบ บันทึกคะแนนลง DB
-         → ทุก DB operation (GET/SET) ถูกเก็บ log
+   eiMaths ยิงธนูคณิต — E-learning game (Upgraded Visuals & Audio)
    ========================================================= */
-
-/* ---------- mini "database" + logging ---------- */
-const mem = {};            // memory fallback (เมื่อไม่มี window.storage)
-const LOGS = [];           // บันทึกการทำงานกับ DB
-const SCORES = [];         // ประวัติคะแนน
-const logKey   = (n)=>'eimaths:log:'   + (n||'_anon').toLowerCase();
-const scoreKey = (n)=>'eimaths:scores:'+ (n||'_anon').toLowerCase();
-const saveKey  = (n)=>'eimaths:save:'  + (n||'_anon').toLowerCase();
-
-// raw read/write — ไม่บันทึก log (กันลูปไม่รู้จบ)
-async function rawSet(key, val){
-  mem[key] = val;
-  try { if (window.storage) await window.storage.set(key, JSON.stringify(val), false); } catch(e){}
+/* ---------- Audio System ---------- */
+let soundEnabled = false, audioCtx = null, bgmTimer = null;
+const melodyNotes = [261.6, 329.6, 392.0, 523.3, 392.0, 329.6];
+let noteStep = 0;
+function initAudio() {
+  if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  if(audioCtx.state === 'suspended') audioCtx.resume();
 }
-async function rawGet(key){
-  try { if (window.storage){ const r = await window.storage.get(key, false); return r ? JSON.parse(r.value) : null; } }
-  catch(e){ /* ไม่พบ key หรือใช้ไม่ได้ */ }
+function playTone(freq, type, dur, vol=0.1) {
+  if(!soundEnabled || !audioCtx) return;
+  const osc = audioCtx.createOscillator(), gain = audioCtx.createGain();
+  osc.type = type; osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+  gain.gain.setValueAtTime(vol, audioCtx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + dur);
+  osc.connect(gain); gain.connect(audioCtx.destination);
+  osc.start(); osc.stop(audioCtx.currentTime + dur);
+}
+function startBGM() {
+  if(bgmTimer) clearInterval(bgmTimer);
+  bgmTimer = setInterval(() => {
+    if(screens['s-archery'].classList.contains('on') || screens['s-menu'].classList.contains('on')) {
+      playTone(melodyNotes[noteStep], 'sine', 0.4, 0.02);
+      noteStep = (noteStep + 1) % melodyNotes.length;
+    }
+  }, 450);
+}
+const SFX = {
+  shoot: () => playTone(350, 'triangle', 0.15, 0.1),
+  pop: () => { playTone(880, 'sine', 0.1, 0.15); setTimeout(()=>playTone(1200, 'sine', 0.1, 0.15), 50); },
+  wrong: () => playTone(150, 'sawtooth', 0.4, 0.15),
+  win: () => { [440, 554, 659, 880].forEach((f, i) => setTimeout(() => playTone(f, 'square', 0.2, 0.08), i * 120)); }
+};
+$('#soundToggle').onclick = () => {
+  soundEnabled = !soundEnabled;
+  $('#soundIcon').textContent = soundEnabled ? '🎵' : '🔇';
+  if(soundEnabled) { initAudio(); startBGM(); }
+  else { if(bgmTimer) clearInterval(bgmTimer); bgmTimer = null; }
+};
+/* ---------- mini "database" + logging ---------- */
+const mem = {}, LOGS = [], SCORES = [];
+const logKey   = n => 'eimaths:log:'    + (n||'_anon').toLowerCase();
+const scoreKey = n => 'eimaths:scores:' + (n||'_anon').toLowerCase();
+const saveKey  = n => 'eimaths:save:'   + (n||'_anon').toLowerCase();
+async function rawSet(key, val) {
+  mem[key] = val;
+  try { if(window.storage) await window.storage.set(key, JSON.stringify(val), false); } catch(e){}
+}
+async function rawGet(key) {
+  try { if(window.storage){ const r = await window.storage.get(key, false); return r ? JSON.parse(r.value) : null; } }
+  catch(e){}
   return (key in mem) ? mem[key] : null;
 }
-// บันทึก log ทุกครั้งที่มีการแตะ DB
-async function addLog(action, key, detail){
+async function addLog(action, key, detail) {
   const entry = { t:new Date().toISOString(), player:G.name||'?', action, key, detail };
   LOGS.push(entry);
-  if (LOGS.length > 300) LOGS.splice(0, LOGS.length-300);
-  console.log('[DB-LOG]', entry.t, action, key, JSON.stringify(detail));
-  await rawSet(logKey(G.name), LOGS.slice(-300));   // เก็บ log ลง storage (ใช้ raw จึงไม่ log ซ้ำ)
+  if(LOGS.length > 300) LOGS.splice(0, LOGS.length-300);
+  await rawSet(logKey(G.name), LOGS.slice(-300));
 }
-// API หลักที่ทุกที่ในเกมเรียกใช้ — log อัตโนมัติ
 const DB = {
   async get(key){ const v = await rawGet(key); await addLog('GET', key, {found: v!==null}); return v; },
   async set(key, val){ await rawSet(key, val); await addLog('SET', key, val); }
 };
-
 /* ---------- state ---------- */
 const G = { name:'', level:1, coins:0, problemNo:1, answer:0, raf:0 };
-
 /* ---------- helpers ---------- */
-const $ = sel=>document.querySelector(sel);
-const screens = {}; document.querySelectorAll('.screen').forEach(s=>screens[s.id]=s);
-function show(id){ Object.values(screens).forEach(s=>s.classList.remove('on')); screens[id].classList.add('on'); }
+const $ = sel => document.querySelector(sel);
+const screens = {}; document.querySelectorAll('.screen').forEach(s => screens[s.id] = s);
+function show(id){ Object.values(screens).forEach(s => s.classList.remove('on')); screens[id].classList.add('on'); }
 function rnd(a,b){ return Math.floor(Math.random()*(b-a+1))+a; }
 function shuffle(arr){ for(let i=arr.length-1;i>0;i--){const j=rnd(0,i);[arr[i],arr[j]]=[arr[j],arr[i]];} return arr; }
-
-/* ---------- math problems (ยากขึ้นตามด่าน) ---------- */
+/* ---------- math problems ---------- */
 function makeProblem(level){
   let a,b,op,answer;
   if(level<=1){ a=rnd(2,9); b=rnd(2,9); op='+'; }
@@ -267,46 +274,42 @@ function decoys(answer, count){
   let n=1; while(out.size<count){ if(answer+n>=0) out.add(answer+n); n++; }
   return [...out];
 }
-
-/* ============================ 1) LOGIN ============================ */
-$('#loginBtn').onclick = async ()=>{
+/* ============================ LOGIN ============================ */
+$('#loginBtn').onclick = async () => {
+  if(soundEnabled) initAudio();
   const name = $('#nameInput').value.trim() || 'เพื่อน';
   G.name = name;
-  // โหลด log + scores เดิม (raw, ไม่ log)
-  const exLogs = await rawGet(logKey(name));   if(Array.isArray(exLogs)){ LOGS.length=0; LOGS.push(...exLogs); }
+  const exLogs = await rawGet(logKey(name)); if(Array.isArray(exLogs)){ LOGS.length=0; LOGS.push(...exLogs); }
   const exScores = await rawGet(scoreKey(name)); if(Array.isArray(exScores)){ SCORES.length=0; SCORES.push(...exScores); }
-  // อ่านเซฟ (ผ่าน DB → ถูก log)
   const save = await DB.get(saveKey(name));
   $('#helloName').textContent = 'สวัสดี ' + name + '! 🦊';
   if(save){ $('#menuStats').textContent = `เล่นถึงด่าน ${save.level} · มี ${save.coins} 🪙`; $('#continueBtn').disabled=false; }
   else { $('#menuStats').textContent = 'ยังไม่มีการเล่นมาก่อน — เริ่มกันเลย!'; $('#continueBtn').disabled=true; }
   show('s-menu');
 };
-$('#nameInput').addEventListener('keydown',e=>{ if(e.key==='Enter') $('#loginBtn').click(); });
-
-/* ============================ 2) MENU ============================ */
-$('#newBtn').onclick = ()=>{ G.level=1; G.coins=0; G.problemNo=1; startQuiz(); };
-$('#continueBtn').onclick = async ()=>{
+$('#nameInput').addEventListener('keydown', e => { if(e.key==='Enter') $('#loginBtn').click(); });
+/* ============================ MENU ============================ */
+$('#newBtn').onclick = () => { G.level=1; G.coins=0; G.problemNo=1; startQuiz(); };
+$('#continueBtn').onclick = async () => {
   const save = await DB.get(saveKey(G.name));
   if(save){ G.level=save.level; G.coins=save.coins; G.problemNo=save.problemNo||1; }
   startQuiz();
 };
-$('#logoutBtn').onclick = ()=>{ $('#nameInput').value=G.name; show('s-login'); };
-$('#winMenuBtn').onclick = ()=>refreshMenu();
-$('#wrongMenuBtn').onclick = ()=>refreshMenu();
-$('#stopMenuBtn').onclick = ()=>refreshMenu();
+$('#logoutBtn').onclick = () => { $('#nameInput').value=G.name; show('s-login'); };
+$('#winMenuBtn').onclick = () => refreshMenu();
+$('#wrongMenuBtn').onclick = () => refreshMenu();
+$('#stopMenuBtn').onclick = () => refreshMenu();
 async function refreshMenu(){
   const save = await DB.get(saveKey(G.name));
   if(save){ $('#menuStats').textContent=`เล่นถึงด่าน ${save.level} · มี ${save.coins} 🪙`; $('#continueBtn').disabled=false; }
   show('s-menu');
 }
-// log viewer
-$('#logBtn').onclick = ()=>{ renderLogs(); show('s-log'); };
-$('#logBackBtn').onclick = ()=>show('s-menu');
+$('#logBtn').onclick = () => { renderLogs(); show('s-log'); };
+$('#logBackBtn').onclick = () => show('s-menu');
 function renderLogs(){
   const box=$('#logBox'); box.innerHTML='';
   if(!LOGS.length){ const d=document.createElement('div'); d.className='log-row'; d.textContent='ยังไม่มีบันทึก'; box.appendChild(d); return; }
-  [...LOGS].reverse().forEach(e=>{
+  [...LOGS].reverse().forEach(e => {
     const row=document.createElement('div'); row.className='log-row';
     const tt=document.createElement('span'); tt.className='tt'; tt.textContent=new Date(e.t).toLocaleTimeString('th-TH');
     const ac=document.createElement('span'); ac.className='ac '+e.action; ac.textContent=e.action;
@@ -316,16 +319,15 @@ function renderLogs(){
     row.append(tt,ac,kk); box.appendChild(row);
   });
 }
-
-/* ============================ 3) QUIZ ============================ */
-let quizTimer=null;
+/* ============================ QUIZ ============================ */
+let quizTimer = null;
 function readSeconds(level){ return Math.max(5, 14-(level-1)); }
 function startQuiz(){
   const p=makeProblem(G.level); G.answer=p.answer;
   $('#hudLevel').textContent=G.level; $('#hudCoins').textContent=G.coins; $('#qText').textContent=p.text;
   const opts=shuffle([p.answer, ...decoys(p.answer,3)]);
   const box=$('#choices'); box.innerHTML='';
-  opts.forEach(v=>{ const b=document.createElement('button'); b.className='choice'; b.textContent=v; b.onclick=()=>chooseAnswer(b,v); box.appendChild(b); });
+  opts.forEach(v => { const b=document.createElement('button'); b.className='choice'; b.textContent=v; b.onclick=()=>chooseAnswer(b,v); box.appendChild(b); });
   const total=readSeconds(G.level); $('#timerNum').textContent=total; $('#timerFill').style.width='100%';
   const t0=performance.now(); clearInterval(quizTimer);
   quizTimer=setInterval(()=>{
@@ -335,16 +337,14 @@ function startQuiz(){
   },100);
   show('s-quiz');
 }
-function chooseAnswer(btn,value){
+function chooseAnswer(btn, value){
   clearInterval(quizTimer);
-  document.querySelectorAll('.choice').forEach(c=>c.style.pointerEvents='none');
-  if(value===G.answer){ btn.classList.add('right'); setTimeout(startArchery,550); }
-  else { btn.classList.add('wrong');
-    document.querySelectorAll('.choice').forEach(c=>{ if(+c.textContent===G.answer) c.classList.add('right'); });
-    setTimeout(()=>showWrong(false),900);
-  }
+  document.querySelectorAll('.choice').forEach(c => c.style.pointerEvents='none');
+  if(value===G.answer){ SFX.shoot(); btn.classList.add('right'); setTimeout(startArchery,550); }
+  else { SFX.wrong(); btn.classList.add('wrong'); document.querySelectorAll('.choice').forEach(c=>{ if(+c.textContent===G.answer) c.classList.add('right'); }); setTimeout(()=>showWrong(false),900); }
 }
 function timeUp(){
+  SFX.wrong();
   document.querySelectorAll('.choice').forEach(c=>{ c.style.pointerEvents='none'; if(+c.textContent===G.answer) c.classList.add('right'); });
   setTimeout(()=>showWrong(true),900);
 }
@@ -353,39 +353,34 @@ function showWrong(isTimeout){
   $('#wrongMsg').textContent='คำตอบที่ถูกคือ '+G.answer;
   show('s-wrong');
 }
-$('#retryBtn').onclick = ()=>startQuiz();
-
-/* ============================ 4) ARCHERY ============================ */
+$('#retryBtn').onclick = () => startQuiz();
+/* ============================ ARCHERY ============================ */
 const canvas=$('#gameCanvas'), ctx=canvas.getContext('2d');
-let CW=0,CH=0,DPR=1;
+let CW=0, CH=0, DPR=1;
 function resizeCanvas(){
   DPR=Math.min(window.devicePixelRatio||1,2);
   CW=canvas.clientWidth; CH=canvas.clientHeight;
   canvas.width=CW*DPR; canvas.height=CH*DPR; ctx.setTransform(DPR,0,0,DPR,0,0);
 }
-window.addEventListener('resize',()=>{ if(screens['s-archery'].classList.contains('on')) resizeCanvas(); });
-
+window.addEventListener('resize', () => { if(screens['s-archery'].classList.contains('on')) resizeCanvas(); });
 const BALLOON_COLORS=['#ff6b6b','#ff924c','#ffc93c','#2ec4b6','#5cc6ff','#9d6bff','#ff8fb1'];
 let A=null;
-
 function startArchery(){
   show('s-archery'); resizeCanvas();
   $('#aLevel').textContent=G.level; $('#aCoins').textContent=G.coins; $('#aHits').textContent=0; $('#targetNum').textContent=G.answer;
-
-  const speedMul=1.0+(G.level-1)*0.18;
-  const spawnGap=Math.max(380, 950-(G.level-1)*70);
-  const fakeVals=decoys(G.answer,25);
-  const queue=[];
-  for(let i=0;i<5;i++)  queue.push({value:G.answer, real:true});
-  for(let i=0;i<25;i++) queue.push({value:fakeVals[i%fakeVals.length], real:false});
-  shuffle(queue);
-
+  const speedMul=1.0+(G.level-1)*0.18, spawnGap=Math.max(380,950-(G.level-1)*70);
+  const fakeVals=decoys(G.answer,15); shuffle(fakeVals);
+  const queue=[]; let fi=0;
+  for(let i=0;i<5;i++){
+    // fake 1-3 ลูกก่อนทุก real → รับประกัน real ออกครบ 5
+    const n=rnd(1,3);
+    for(let j=0;j<n;j++) queue.push({value:fakeVals[fi++%fakeVals.length],real:false});
+    queue.push({value:G.answer,real:true});
+  }
   A={ bowX:CW/2, bowY:CH-46, aimX:CW/2, aimY:CH*0.4,
       arrows:[], targets:[], particles:[], coinsPop:[],
       queue, spawned:0, speedMul, spawnGap, lastSpawn:0,
-      realHits:0, coinsEarned:0, totalReal:5,
-      shake:0, running:false, gameOver:null, overAt:0 };
-
+      realHits:0, coinsEarned:0, totalReal:5, shake:0, running:false, gameOver:null, overAt:0 };
   const cd=$('#countdown'), cdN=$('#cdNum');
   cd.style.display='flex'; let n=3; cdN.textContent=n; cdN.className='num';
   const ci=setInterval(()=>{
@@ -395,66 +390,54 @@ function startArchery(){
     else { clearInterval(ci); cd.style.display='none'; A.running=true; A.lastSpawn=performance.now(); loop(); }
   },800);
 }
-
-/* ปุ่มหยุดเกมเอง */
-$('#stopGameBtn').onclick = ()=>{ if(A && A.running){ A.gameOver='manual'; A.running=false; } };
-
-/* aim + shoot */
-function pointerPos(e){ const r=canvas.getBoundingClientRect(); const p=e.touches?e.touches[0]:e; return {x:p.clientX-r.left, y:p.clientY-r.top}; }
+$('#stopGameBtn').onclick = () => { if(A && A.running){ A.gameOver='manual'; A.running=false; } };
+function pointerPos(e){ const r=canvas.getBoundingClientRect(), p=e.touches?e.touches[0]:e; return {x:p.clientX-r.left,y:p.clientY-r.top}; }
 function onAim(e){ if(!A) return; const p=pointerPos(e); A.aimX=p.x; A.aimY=p.y; }
 function onShoot(e){
   if(!A||!A.running) return; e.preventDefault();
   const p=pointerPos(e); A.aimX=p.x; A.aimY=p.y;
-  const dx=A.aimX-A.bowX, dy=A.aimY-A.bowY, len=Math.hypot(dx,dy)||1, spd=15;
+  const dx=A.aimX-A.bowX, dy=A.aimY-(A.bowY-15), len=Math.hypot(dx,dy)||1, spd=15;
   let vy=(dy/len)*spd; if(vy>-2) vy=-2;
-  A.arrows.push({x:A.bowX, y:A.bowY-28, vx:(dx/len)*spd, vy, ang:Math.atan2(dy,dx)});
+  A.arrows.push({x:A.bowX,y:A.bowY-15,vx:(dx/len)*spd,vy,ang:Math.atan2(dy,dx)});
+  SFX.shoot();
 }
-canvas.addEventListener('mousemove',onAim);
-canvas.addEventListener('mousedown',onShoot);
-canvas.addEventListener('touchmove',e=>{onAim(e); e.preventDefault();},{passive:false});
-canvas.addEventListener('touchstart',onShoot,{passive:false});
-
+canvas.addEventListener('mousemove', onAim);
+canvas.addEventListener('mousedown', onShoot);
+canvas.addEventListener('touchmove', e=>{onAim(e);e.preventDefault();},{passive:false});
+canvas.addEventListener('touchstart', onShoot,{passive:false});
 function spawnTarget(){
   if(A.spawned>=A.queue.length) return;
-  const item=A.queue[A.spawned++];
-  const fromLeft=Math.random()<.5, r=34;
+  const item=A.queue[A.spawned++], fromLeft=Math.random()<.5, r=34;
   const y=rnd(Math.round(CH*0.16),Math.round(CH*0.55));
   const baseV=(2.2+Math.random()*1.0)*A.speedMul;
-  A.targets.push({ x:fromLeft?-r:CW+r, y, r, vx:fromLeft?baseV:-baseV, bob:Math.random()*Math.PI*2,
-                   value:item.value, real:item.real, color:BALLOON_COLORS[rnd(0,BALLOON_COLORS.length-1)],
-                   born:performance.now(), alive:true });
+  A.targets.push({x:fromLeft?-r:CW+r,y,r,vx:fromLeft?baseV:-baseV,bob:Math.random()*Math.PI*2,
+                  value:item.value,real:item.real,color:BALLOON_COLORS[rnd(0,BALLOON_COLORS.length-1)],alive:true});
 }
-function addParticles(x,y,color,n){ for(let i=0;i<n;i++){ const a=Math.random()*Math.PI*2, s=2+Math.random()*4; A.particles.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s-2,life:1,color}); } }
-
+function addParticles(x,y,color,n){ for(let i=0;i<n;i++){const a=Math.random()*Math.PI*2,s=2+Math.random()*4; A.particles.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s-2,life:1,color});} }
 function loop(){
   if(!A) return;
   const now=performance.now();
   if(A.running && A.spawned<A.queue.length && now-A.lastSpawn>=A.spawnGap){ spawnTarget(); A.lastSpawn=now; }
-
   for(const ar of A.arrows){ ar.x+=ar.vx; ar.y+=ar.vy; ar.vy+=0.12; ar.ang=Math.atan2(ar.vy,ar.vx); }
   A.arrows=A.arrows.filter(ar=> ar.y<CH+40 && ar.x>-40 && ar.x<CW+40);
   for(const t of A.targets){ t.x+=t.vx; t.bob+=0.05; }
   A.targets=A.targets.filter(t=> t.alive && t.x>-60 && t.x<CW+60);
-
-  // collisions
   for(const ar of A.arrows){
     if(A.gameOver) break;
     for(const t of A.targets){
       if(!t.alive) continue;
       const dy=t.y+Math.sin(t.bob)*6;
-      if(Math.hypot(ar.x-t.x, ar.y-dy) < t.r+6){
+      if(Math.hypot(ar.x-t.x,ar.y-dy)<t.r+6){
         t.alive=false; ar.dead=true;
         if(t.real){
-          A.realHits++; $('#aHits').textContent=A.realHits;
-          const age=(now-t.born)/1000;
-          const coin = age<1.2?5 : age<2.6?2 : 1;     // ยิงไว = 5 / กลาง = 2 / ช้า = 1
+          SFX.pop(); A.realHits++; $('#aHits').textContent=A.realHits;
+          const coin = 2; // 2 เหรียญต่อลูก
           A.coinsEarned+=coin; G.coins+=coin; $('#aCoins').textContent=G.coins;
           addParticles(t.x,dy,t.color,18);
           A.coinsPop.push({x:t.x,y:dy,txt:'+'+coin+' 🪙',life:1,good:true});
-          DB.set(saveKey(G.name), {level:G.level, coins:G.coins, problemNo:G.problemNo}); // เก็บเข้า DB ทันที (logged)
+          DB.set(saveKey(G.name),{level:G.level,coins:G.coins,problemNo:G.problemNo});
         } else {
-          // ยิงโดนคำตอบอื่น → เกมจบทันที
-          addParticles(t.x,dy,'#ffffff',12);
+          SFX.wrong(); addParticles(t.x,dy,'#ffffff',12);
           A.coinsPop.push({x:t.x,y:dy,txt:'ผิด!',life:1.4,good:false});
           A.shake=14; A.gameOver='wrong'; A.running=false;
         }
@@ -463,14 +446,11 @@ function loop(){
     }
   }
   A.arrows=A.arrows.filter(ar=>!ar.dead);
-
   for(const p of A.particles){ p.x+=p.vx; p.y+=p.vy; p.vy+=0.18; p.life-=0.03; }
   A.particles=A.particles.filter(p=>p.life>0);
   for(const c of A.coinsPop){ c.y-=1.2; c.life-=0.02; }
   A.coinsPop=A.coinsPop.filter(c=>c.life>0);
-
   draw();
-
   if(A.gameOver){
     if(!A.overAt) A.overAt=now;
     if(now-A.overAt>700){ cancelAnimationFrame(G.raf); finishRound(A.gameOver); return; }
@@ -480,86 +460,96 @@ function loop(){
   }
   G.raf=requestAnimationFrame(loop);
 }
-
 function draw(){
   ctx.save();
   if(A.shake>0){ ctx.translate(rnd(-A.shake,A.shake),rnd(-A.shake,A.shake)); A.shake*=0.85; if(A.shake<0.5)A.shake=0; }
-  const g=ctx.createLinearGradient(0,0,0,CH); g.addColorStop(0,'#5cc6ff'); g.addColorStop(1,'#b8ecff');
+  const g=ctx.createLinearGradient(0,0,0,CH); g.addColorStop(0,'#4cb8ff'); g.addColorStop(1,'#b8ecff');
   ctx.fillStyle=g; ctx.fillRect(0,0,CW,CH);
-  ctx.fillStyle='rgba(255,201,60,.9)'; ctx.beginPath(); ctx.arc(CW-54,64,34,0,7); ctx.fill();
-  ctx.fillStyle='#7bd86a'; ctx.fillRect(0,CH-70,CW,70);
-  ctx.fillStyle='#52b34a'; ctx.fillRect(0,CH-70,CW,10);
-
+  ctx.fillStyle='#ffde59'; ctx.beginPath(); ctx.arc(CW-60,60,40,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle='rgba(255,222,89,0.3)'; ctx.beginPath(); ctx.arc(CW-60,60,60,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle='rgba(255,255,255,0.85)';
+  ctx.beginPath(); ctx.arc(CW*0.15,80,25,0,Math.PI*2); ctx.arc(CW*0.15+35,70,35,0,Math.PI*2); ctx.arc(CW*0.15+70,80,25,0,Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(CW*0.75,120,20,0,Math.PI*2); ctx.arc(CW*0.75+25,110,30,0,Math.PI*2); ctx.arc(CW*0.75+50,120,20,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle='#8ce071'; ctx.beginPath(); ctx.arc(CW*0.3,CH-20,CW*0.5,Math.PI,0); ctx.fill();
+  ctx.fillStyle='#7bd86a'; ctx.beginPath(); ctx.arc(CW*0.8,CH-10,CW*0.6,Math.PI,0); ctx.fill();
+  ctx.fillStyle='#52b34a'; ctx.fillRect(0,CH-50,CW,50);
   for(const t of A.targets){
     const dy=t.y+Math.sin(t.bob)*6;
-    ctx.strokeStyle='rgba(255,255,255,.6)'; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(t.x,dy+t.r); ctx.lineTo(t.x,dy+t.r+18); ctx.stroke();
+    ctx.strokeStyle='rgba(255,255,255,.6)'; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.moveTo(t.x,dy+t.r); ctx.lineTo(t.x,dy+t.r+22); ctx.stroke();
     ctx.fillStyle=t.color; ctx.beginPath(); ctx.ellipse(t.x,dy,t.r*0.92,t.r,0,0,7); ctx.fill();
     ctx.fillStyle='rgba(255,255,255,.45)'; ctx.beginPath(); ctx.ellipse(t.x-t.r*0.3,dy-t.r*0.35,t.r*0.18,t.r*0.28,-0.5,0,7); ctx.fill();
-    ctx.fillStyle='#fff'; ctx.font='800 '+Math.round(t.r*0.95)+'px '+getComputedStyle(document.body).fontFamily;
+    ctx.fillStyle='#fff'; ctx.font='800 '+Math.round(t.r*0.95)+'px sans-serif';
     ctx.textAlign='center'; ctx.textBaseline='middle';
     ctx.lineWidth=3; ctx.strokeStyle='rgba(0,0,0,.18)';
     ctx.strokeText(t.value,t.x,dy); ctx.fillText(t.value,t.x,dy);
   }
-
   ctx.strokeStyle='rgba(255,255,255,.5)'; ctx.lineWidth=3; ctx.setLineDash([6,8]);
-  ctx.beginPath(); ctx.moveTo(A.bowX,A.bowY-28); ctx.lineTo(A.aimX,A.aimY); ctx.stroke(); ctx.setLineDash([]);
-
+  ctx.beginPath(); ctx.moveTo(A.bowX,A.bowY-15); ctx.lineTo(A.aimX,A.aimY); ctx.stroke(); ctx.setLineDash([]);
   for(const ar of A.arrows){
     ctx.save(); ctx.translate(ar.x,ar.y); ctx.rotate(ar.ang);
-    ctx.strokeStyle='#5b3a1a'; ctx.lineWidth=4; ctx.beginPath(); ctx.moveTo(-26,0); ctx.lineTo(8,0); ctx.stroke();
-    ctx.fillStyle='#c0392b'; ctx.beginPath(); ctx.moveTo(8,0); ctx.lineTo(0,-6); ctx.lineTo(0,6); ctx.closePath(); ctx.fill();
-    ctx.fillStyle='#ffd166'; ctx.beginPath(); ctx.moveTo(-26,0); ctx.lineTo(-32,-5); ctx.lineTo(-22,0); ctx.lineTo(-32,5); ctx.closePath(); ctx.fill();
+    ctx.strokeStyle='#ecf0f1'; ctx.lineWidth=4; ctx.beginPath(); ctx.moveTo(-26,0); ctx.lineTo(8,0); ctx.stroke();
+    ctx.fillStyle='#ffc93c'; ctx.beginPath(); ctx.moveTo(8,0); ctx.lineTo(0,-6); ctx.lineTo(0,6); ctx.closePath(); ctx.fill();
+    ctx.fillStyle='#ff6b6b'; ctx.beginPath(); ctx.moveTo(-26,0); ctx.lineTo(-32,-5); ctx.lineTo(-22,0); ctx.lineTo(-32,5); ctx.closePath(); ctx.fill();
     ctx.restore();
   }
-
   ctx.save(); ctx.translate(A.bowX,A.bowY);
-  ctx.fillStyle='#6b4f2a'; ctx.beginPath(); ctx.arc(0,0,18,0,7); ctx.fill();
-  ctx.fillStyle='#ffe0b2'; ctx.beginPath(); ctx.arc(0,-22,12,0,7); ctx.fill();
-  ctx.strokeStyle='#8d5524'; ctx.lineWidth=5; ctx.beginPath(); ctx.arc(0,-26,26,-0.6,0.6); ctx.stroke();
+  ctx.fillStyle='#f0a500';
+  ctx.beginPath(); ctx.moveTo(-15,-10); ctx.lineTo(-25,-35); ctx.lineTo(-5,-20); ctx.fill();
+  ctx.beginPath(); ctx.moveTo(15,-10); ctx.lineTo(25,-35); ctx.lineTo(5,-20); ctx.fill();
+  ctx.beginPath(); ctx.arc(0,-12,22,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle='#ffffff';
+  ctx.beginPath(); ctx.arc(-10,-6,12,0,Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(10,-6,12,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle='#243b53';
+  ctx.beginPath(); ctx.arc(-10,-10,3.5,0,Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(10,-10,3.5,0,Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(0,-2,4.5,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle='#e69500'; ctx.beginPath(); ctx.arc(0,18,16,Math.PI,0); ctx.fill();
+  ctx.strokeStyle='#2ec4b6'; ctx.lineWidth=6; ctx.shadowColor='#5cc6ff'; ctx.shadowBlur=12;
+  ctx.beginPath(); ctx.arc(0,-15,30,-0.7,0.7); ctx.stroke(); ctx.shadowBlur=0;
+  ctx.strokeStyle='rgba(255,255,255,0.9)'; ctx.lineWidth=2;
+  ctx.beginPath(); ctx.moveTo(22,-34); ctx.lineTo(0,-15); ctx.lineTo(22,4); ctx.stroke();
   ctx.restore();
-
   for(const p of A.particles){ ctx.globalAlpha=Math.max(0,p.life); ctx.fillStyle=p.color; ctx.beginPath(); ctx.arc(p.x,p.y,4,0,7); ctx.fill(); }
   ctx.globalAlpha=1;
-  for(const c of A.coinsPop){ ctx.globalAlpha=Math.max(0,c.life); ctx.fillStyle=c.good?'#f0a500':'#ff3b3b'; ctx.font='800 24px '+getComputedStyle(document.body).fontFamily; ctx.textAlign='center'; ctx.fillText(c.txt,c.x,c.y); }
+  for(const c of A.coinsPop){ ctx.globalAlpha=Math.max(0,c.life); ctx.fillStyle=c.good?'#f0a500':'#ff3b3b'; ctx.font='800 24px sans-serif'; ctx.textAlign='center'; ctx.fillText(c.txt,c.x,c.y); }
   ctx.globalAlpha=1; ctx.restore();
 }
-
-/* ============================ 5/6) END ROUND ============================ */
+/* ============================ END ROUND ============================ */
 function saveScore(reason){
-  SCORES.push({ t:new Date().toISOString(), level:G.level, problemNo:G.problemNo,
-                realHits:A.realHits, coinsEarned:A.coinsEarned, totalCoins:G.coins, reason });
+  SCORES.push({t:new Date().toISOString(),level:G.level,problemNo:G.problemNo,realHits:A.realHits,coinsEarned:A.coinsEarned,totalCoins:G.coins,reason});
   if(SCORES.length>100) SCORES.splice(0,SCORES.length-100);
-  DB.set(scoreKey(G.name), SCORES.slice(-100));   // เก็บคะแนนลง DB (logged)
+  DB.set(scoreKey(G.name), SCORES.slice(-100));
 }
 function finishRound(reason){
   saveScore(reason);
   if(reason==='complete'){
+    SFX.win();
     $('#winHits').textContent=`ยิงถูก ${A.realHits} / 5 ลูก`;
     $('#winCoins').textContent=`+${A.coinsEarned} 🪙  (รวม ${G.coins})`;
     G.level+=1; G.problemNo+=1;
-    DB.set(saveKey(G.name), {level:G.level, coins:G.coins, problemNo:G.problemNo});
+    DB.set(saveKey(G.name),{level:G.level,coins:G.coins,problemNo:G.problemNo});
     show('s-win');
   } else {
     const info={
-      wrong:     {e:'💥', t:'ยิงโดนคำตอบอื่น!', n:'ต้องยิงเฉพาะลูกเลข '+G.answer+' เท่านั้นนะ'},
-      manual:    {e:'⏸️', t:'หยุดเกมแล้ว',      n:'หยุดเองก่อนครบ 5 ลูก'},
-      incomplete:{e:'🎈', t:'ลูกโป่งหมดแล้ว',    n:'รอบหน้ายิงให้ครบ 5 ลูกนะ'}
-    }[reason] || {e:'🛑', t:'จบรอบ', n:''};
-    $('#stopEmoji').textContent=info.e;
-    $('#stopTitle').textContent=info.t;
+      wrong:     {e:'💥',t:'ยิงโดนคำตอบอื่น!',n:'ต้องยิงเฉพาะลูกเลข '+G.answer+' เท่านั้นนะ'},
+      manual:    {e:'⏸️',t:'หยุดเกมแล้ว',n:'หยุดเองก่อนครบ 5 ลูก'},
+      incomplete:{e:'🎈',t:'ลูกโป่งหมดแล้ว',n:'รอบหน้ายิงให้ครบ 5 ลูกนะ'}
+    }[reason]||{e:'🛑',t:'จบรอบ',n:''};
+    $('#stopEmoji').textContent=info.e; $('#stopTitle').textContent=info.t;
     $('#stopHits').textContent=`ยิงถูก ${A.realHits} / 5 ลูก`;
     $('#stopCoins').textContent=`+${A.coinsEarned} 🪙  (รวม ${G.coins})`;
     $('#stopNote').textContent=info.n;
-    DB.set(saveKey(G.name), {level:G.level, coins:G.coins, problemNo:G.problemNo});
+    DB.set(saveKey(G.name),{level:G.level,coins:G.coins,problemNo:G.problemNo});
     show('s-stop');
   }
 }
-$('#nextBtn').onclick = ()=>startQuiz();
-$('#stopRetryBtn').onclick = ()=>startQuiz();
-
+$('#nextBtn').onclick = () => startQuiz();
+$('#stopRetryBtn').onclick = () => startQuiz();
 /* ============================ boot ============================ */
 show('s-login');
-setTimeout(()=>$('#nameInput') && $('#nameInput').focus(), 300);
+setTimeout(() => $('#nameInput') && $('#nameInput').focus(), 300);
 </script>
 </body>
 </html>
