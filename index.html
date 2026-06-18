@@ -431,7 +431,7 @@ function loop(){
         t.alive=false; ar.dead=true;
         if(t.real){
           SFX.pop(); A.realHits++; $('#aHits').textContent=A.realHits;
-          const coin = 2; // 2 เหรียญต่อลูก
+          const coin = 1; // 1 เหรียญต่อลูก
           A.coinsEarned+=coin; G.coins+=coin; $('#aCoins').textContent=G.coins;
           addParticles(t.x,dy,t.color,18);
           A.coinsPop.push({x:t.x,y:dy,txt:'+'+coin+' 🪙',life:1,good:true});
