@@ -80,7 +80,7 @@
 <body>
 <div id="app">
   <button id="soundToggle" class="pill top-right-float">
-    <span id="soundIcon">🔇</span> <span class="lbl">เสียง</span>
+    <span id="soundIcon">🎵</span> <span class="lbl">เสียง</span>
   </button>
   <!-- 1) LOGIN -->
   <section class="screen on" id="s-login">
@@ -182,13 +182,22 @@
    eiMaths ยิงธนูคณิต — E-learning game (Upgraded Visuals & Audio)
    ========================================================= */
 /* ---------- Audio System ---------- */
-let soundEnabled = false, audioCtx = null, bgmTimer = null;
+let soundEnabled = true, audioCtx = null, bgmTimer = null;
 const melodyNotes = [261.6, 329.6, 392.0, 523.3, 392.0, 329.6];
 let noteStep = 0;
 function initAudio() {
   if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   if(audioCtx.state === 'suspended') audioCtx.resume();
 }
+// unlock audio on first touch (iOS/Android autoplay policy)
+document.addEventListener('touchstart', function unlock(){
+  if(soundEnabled) initAudio();
+  document.removeEventListener('touchstart', unlock);
+}, {once:true});
+document.addEventListener('mousedown', function unlock(){
+  if(soundEnabled) initAudio();
+  document.removeEventListener('mousedown', unlock);
+}, {once:true});
 function playTone(freq, type, dur, vol=0.1) {
   if(!soundEnabled || !audioCtx) return;
   const osc = audioCtx.createOscillator(), gain = audioCtx.createGain();
