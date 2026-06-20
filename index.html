@@ -181,6 +181,10 @@
 /* =========================================================
    eiMaths ยิงธนูคณิต — E-learning game (Upgraded Visuals & Audio)
    ========================================================= */
+/* ---------- helpers ---------- */
+const $ = sel => document.querySelector(sel);
+const screens = {}; document.querySelectorAll('.screen').forEach(s => screens[s.id] = s);
+function show(id){ Object.values(screens).forEach(s => s.classList.remove('on')); screens[id].classList.add('on'); }
 /* ---------- Audio System ---------- */
 let soundEnabled = true, audioCtx = null, bgmTimer = null;
 const melodyNotes = [261.6, 329.6, 392.0, 523.3, 392.0, 329.6];
@@ -256,10 +260,6 @@ const DB = {
 };
 /* ---------- state ---------- */
 const G = { name:'', level:1, coins:0, problemNo:1, answer:0, raf:0 };
-/* ---------- helpers ---------- */
-const $ = sel => document.querySelector(sel);
-const screens = {}; document.querySelectorAll('.screen').forEach(s => screens[s.id] = s);
-function show(id){ Object.values(screens).forEach(s => s.classList.remove('on')); screens[id].classList.add('on'); }
 function rnd(a,b){ return Math.floor(Math.random()*(b-a+1))+a; }
 function shuffle(arr){ for(let i=arr.length-1;i>0;i--){const j=rnd(0,i);[arr[i],arr[j]]=[arr[j],arr[i]];} return arr; }
 /* ---------- math problems ---------- */
