@@ -430,7 +430,7 @@ function loop(){
   const now=performance.now();
   if(A.running && A.spawned<A.queue.length && now-A.lastSpawn>=A.spawnGap){ spawnTarget(); A.lastSpawn=now; }
   for(const ar of A.arrows){ ar.x+=ar.vx; ar.y+=ar.vy; ar.vy+=0.12; ar.ang=Math.atan2(ar.vy,ar.vx); }
-  A.arrows=A.arrows.filter(ar=> ar.y<CH+40 && ar.x>-40 && ar.x<CW+40);
+  A.arrows=A.arrows.filter(ar=> ar.y<CH+40 && ar.y>-40 && ar.x>-40 && ar.x<CW+40);
   for(const t of A.targets){ t.x+=t.vx; t.bob+=0.05; }
   A.targets=A.targets.filter(t=> t.alive && t.x>-60 && t.x<CW+60);
   for(const ar of A.arrows){
